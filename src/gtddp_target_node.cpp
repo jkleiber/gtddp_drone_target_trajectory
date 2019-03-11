@@ -1,7 +1,6 @@
 //Include system libraries
 #include <ros/ros.h>
 #include <ros/console.h>
-#include <sstream>
 #include <vector>
 
 //Include other libraries
@@ -11,10 +10,7 @@
 //Include package classes
 #include "gtddp_drone_target_trajectory/trajectory/target_trajectory.h"
 #include "gtddp_drone_target_trajectory/trajectory/straight_line.h"
-
-
-#define MAX_BUFFER 100
-#define NUM_STATES 12
+#include "gtddp_drone_target_trajectory/gtddp_traj_constants.h"
 
 int main(int argc, char **argv)
 {
@@ -27,30 +23,21 @@ int main(int argc, char **argv)
     //Advertise control output and landing mode
     ros::Publisher target_pub = target_node.advertise<gtddp_drone_msgs::state_data>(target_node.resolveName("/gtddp_drone_target_trajectory/target_state"), MAX_BUFFER);
     
-    //TODO: set up a timer for changing the target state
+    //Set up a time tracker for updating the target state
+    ros::Time start_time;
+    ros::Time cur_time;
 
     //Establish a loop rate for the target node to run at
-    ros::Rate loop_rate(1); //100 Hz
+    ros::Rate loop_rate(5); //5 Hz
 
-    //Create a state message
-    gtddp_drone_msgs::state_data target_state;
-
-    //Create an instance of the straight line trajectory
+    //Create an instance of the straight line trajectory, and choose a terminal state
     TargetTrajectory *target_traj = new StraightLine(1.0, 0, 1.0, 100.0);
 
-    //Choose an initial target state
-    //TODO: make this dynamic
-    std::vector<double> state_vector(NUM_STATES, 0.0);
-    state_vector[0] = 1;
-    state_vector[1] = 0;
-    state_vector[2] = 1;
+    //Wait for subscribers before publishing state data or starting the timers
+    while(target_pub.getNumSubscribers() < 1){}
 
-    //Add the values to the initial state
-    //TODO: make a cleaner way of doing this when paths are to be followed
-    for(int i = 0; i < NUM_STATES; ++i)
-        target_state.states[i] = state_vector[i];
-
-    //TODO: Add timers to accurately track horizon
+    //Set the start time
+    start_time = ros::Time::now();
 
     //Run the target state loop
     while(ros::ok())
@@ -58,11 +45,11 @@ int main(int argc, char **argv)
         //Handle ROS events
         ros::spinOnce();
 
-        //TODO: get the target state from the abstract class
-        //target_state = target_traj->get_target()
+        //Get current time
+        cur_time = ros::Time::now();
 
-        //Send out the target state every loop
-        target_pub.publish(target_state);
+        //Calculate and send out the target state every loop
+        target_pub.publish(target_traj->get_target((cur_time.toSec() - start_time.toSec())));
 
         //Sleep until it's time to run again
         loop_rate.sleep();

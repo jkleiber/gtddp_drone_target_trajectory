@@ -3,6 +3,7 @@
 
 #include "gtddp_drone_msgs/state_data.h"
 #include "gtddp_drone_target_trajectory/trajectory/target_trajectory.h"
+#include "gtddp_drone_target_trajectory/gtddp_traj_constants.h"
 
 class StraightLine : public TargetTrajectory
 {

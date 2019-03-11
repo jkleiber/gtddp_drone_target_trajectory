@@ -1,0 +1,7 @@
+#ifndef GTDDP_TRAJ_CONSTANTS_H
+#define GTDDP_TRAJ_CONSTANTS_H
+
+#define MAX_BUFFER 100
+#define NUM_STATES 12
+
+#endif
