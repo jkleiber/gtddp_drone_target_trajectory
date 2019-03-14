@@ -31,10 +31,13 @@ int main(int argc, char **argv)
     ros::Rate loop_rate(5); //5 Hz
 
     //Create an instance of the straight line trajectory, and choose a terminal state
-    TargetTrajectory *target_traj = new StraightLine(1.0, 0, 1.0, 100.0);
+    TargetTrajectory *target_traj = new StraightLine(5, 0, 1.0, 100.0);
 
     //Wait for subscribers before publishing state data or starting the timers
     while(target_pub.getNumSubscribers() < 1){}
+
+    //Wait for the clock topic to publish
+    while(ros::Time::now().isZero()){}
 
     //Set the start time
     start_time = ros::Time::now();

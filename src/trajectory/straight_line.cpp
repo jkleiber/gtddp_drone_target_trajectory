@@ -24,7 +24,7 @@ gtddp_drone_msgs::state_data StraightLine::get_target(double cur_time)
     gtddp_drone_msgs::state_data target_state;
 
     //Create a state vector
-    std::vector<double> state_vector(NUM_STATES, 0.0);
+    std::vector<double> state_vector(NUM_STATES, 0);
 
     //Find interpolation constant
     double interpolation = cur_time / this->target_time;
@@ -39,4 +39,6 @@ gtddp_drone_msgs::state_data StraightLine::get_target(double cur_time)
 
     for(int i = 0; i < NUM_STATES; ++i)
         target_state.states[i] = state_vector[i];
+
+    return target_state;
 }

@@ -1,6 +1,9 @@
 #ifndef STRAIGHT_LINE_H
 #define STRAIGHT_LINE_H
 
+#include <ros/ros.h>
+#include <ros/console.h>
+
 #include "gtddp_drone_msgs/state_data.h"
 #include "gtddp_drone_target_trajectory/trajectory/target_trajectory.h"
 #include "gtddp_drone_target_trajectory/gtddp_traj_constants.h"
