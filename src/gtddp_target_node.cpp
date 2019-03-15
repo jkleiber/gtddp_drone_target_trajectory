@@ -10,6 +10,7 @@
 //Include package classes
 #include "gtddp_drone_target_trajectory/trajectory/target_trajectory.h"
 #include "gtddp_drone_target_trajectory/trajectory/straight_line.h"
+#include "gtddp_drone_target_trajectory/trajectory/spin_around.h"
 #include "gtddp_drone_target_trajectory/gtddp_traj_constants.h"
 
 int main(int argc, char **argv)
@@ -31,7 +32,14 @@ int main(int argc, char **argv)
     ros::Rate loop_rate(5); //5 Hz
 
     //Create an instance of the straight line trajectory, and choose a terminal state
-    TargetTrajectory *target_traj = new StraightLine(5, 0, 1.0, 100.0);
+    //TargetTrajectory *target_traj = new StraightLine(0, 0, 5, 50.0);    //fly up 5 meters
+    TargetTrajectory *target_traj = new StraightLine(0, 5, 1, 50.0);    //fly on y axis 5 meters
+    //TargetTrajectory *target_traj = new StraightLine(5, 0, 1, 50.0);    //fly forward 5 meters
+    //TargetTrajectory *target_traj = new StraightLine(0, 5, 5, 50.0);    //fly up 5 meters and sideways 5 meters
+    //TargetTrajectory *target_traj = new SpinAround(2, 40);
+
+    //Decide how long to wait before publishing target data
+    target_traj->set_lead_time(5);
 
     //Wait for subscribers before publishing state data or starting the timers
     while(target_pub.getNumSubscribers() < 1){}
@@ -41,6 +49,9 @@ int main(int argc, char **argv)
 
     //Set the start time
     start_time = ros::Time::now();
+
+    //Let the horizon point go a bit away from the origin
+    sleep(target_traj->get_lead_time());
 
     //Run the target state loop
     while(ros::ok())
