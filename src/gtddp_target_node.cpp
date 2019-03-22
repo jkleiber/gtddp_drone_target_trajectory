@@ -28,13 +28,16 @@ int main(int argc, char **argv)
     ros::Time start_time;
     ros::Time cur_time;
 
+    //Prepare for the first target to publish
+    bool first_publish = true;
+
     //Establish a loop rate for the target node to run at
     ros::Rate loop_rate(5); //5 Hz
 
     //Create an instance of the straight line trajectory, and choose a terminal state
     //TargetTrajectory *target_traj = new StraightLine(0, 0, 5, 50.0);    //fly up 5 meters
-    TargetTrajectory *target_traj = new StraightLine(0, 5, 1, 50.0);    //fly on y axis 5 meters
-    //TargetTrajectory *target_traj = new StraightLine(5, 0, 1, 50.0);    //fly forward 5 meters
+    //TargetTrajectory *target_traj = new StraightLine(0, 5, 1, 50.0);    //fly on y axis 5 meters
+    TargetTrajectory *target_traj = new StraightLine(5, 0, 1, 10.0);    //fly forward 5 meters
     //TargetTrajectory *target_traj = new StraightLine(0, 5, 5, 50.0);    //fly up 5 meters and sideways 5 meters
     //TargetTrajectory *target_traj = new SpinAround(2, 40);
 
@@ -67,6 +70,13 @@ int main(int argc, char **argv)
 
         //Sleep until it's time to run again
         loop_rate.sleep();
+
+        if(first_publish)
+        {
+            sleep(target_traj->get_lead_time());
+            first_publish = false;
+            loop_rate.reset();
+        }
     }
 
     //Clear dynamic memory allocations
