@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     //TargetTrajectory *target_traj = new SpinAround(2, 40);
 
     //Decide how long to wait before publishing target data
-    target_traj->set_lead_time(5);
+    target_traj->set_lead_time(3);
 
     //Wait for subscribers before publishing state data or starting the timers
     while(target_pub.getNumSubscribers() < 1){}
