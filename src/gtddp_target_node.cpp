@@ -36,8 +36,8 @@ int main(int argc, char **argv)
 
     //Create an instance of the straight line trajectory, and choose a terminal state
     //TargetTrajectory *target_traj = new StraightLine(0, 0, 5, 50.0);    //fly up 5 meters
-    //TargetTrajectory *target_traj = new StraightLine(0, 5, 1, 50.0);    //fly on y axis 5 meters
-    TargetTrajectory *target_traj = new StraightLine(5, 0, 1, 10.0);    //fly forward 5 meters
+    TargetTrajectory *target_traj = new StraightLine(0, 5, 1, 50.0);    //fly on y axis 5 meters
+    //TargetTrajectory *target_traj = new StraightLine(5, 0, 1, 10.0);    //fly forward 5 meters
     //TargetTrajectory *target_traj = new StraightLine(0, 5, 5, 50.0);    //fly up 5 meters and sideways 5 meters
     //TargetTrajectory *target_traj = new SpinAround(2, 40);
 
