@@ -81,9 +81,9 @@ gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
     theta_dot = (last_theta - target[7]) / DT;
 
     //angular rates
-    target[9] = phi_dot;
-    target[10] = theta_dot * cos(target[6]);
-    target[11] = -theta_dot * sin(target[6]);
+    //target[9] = phi_dot;
+    //target[10] = theta_dot * cos(target[6]);
+    //target[11] = -theta_dot * sin(target[6]);
 
     //Convert to state_data
     for(int i = 0; i < NUM_STATES; ++i)

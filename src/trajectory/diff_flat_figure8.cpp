@@ -74,16 +74,16 @@ gtddp_drone_msgs::state_data FigureEight::get_target(double t)
 
     //roll, pitch
     target[6] = -asin(cp2);
-    target[7] = atan(cp1 / cp3);
+    //target[7] = atan2(cp1 / cp3);
 
     //Calculate angular derivatives
     phi_dot = (last_phi - target[6]) / DT;
     theta_dot = (last_theta - target[7]) / DT;
 
     //angular rates
-    target[9] = phi_dot;
-    target[10] = theta_dot * cos(target[6]);
-    target[11] = -theta_dot * sin(target[6]);
+    //target[9] = phi_dot;
+    //target[10] = theta_dot * cos(target[6]);
+    //target[11] = -theta_dot * sin(target[6]);
 
     //Convert to state_data
     for(int i = 0; i < NUM_STATES; ++i)
