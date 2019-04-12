@@ -3,7 +3,7 @@
 
 StraightLine::StraightLine()
 {
-    this->set_lead_time(1);
+
 }
 
 
@@ -14,8 +14,6 @@ StraightLine::StraightLine(double x, double y, double z, double t)
     this->target_y = y;
     this->target_z = z;
     this->target_time = t;
-    
-    this->set_lead_time(1);
 }
 
 

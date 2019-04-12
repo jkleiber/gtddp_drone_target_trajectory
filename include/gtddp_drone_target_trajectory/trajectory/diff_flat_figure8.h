@@ -28,6 +28,10 @@ class FigureEight : public TargetTrajectory
         double beta;
         double gamma;
         double freq;
+
+        //Numerical derivative stuff
+        double last_theta;
+        double last_phi;
 };
 
 #endif

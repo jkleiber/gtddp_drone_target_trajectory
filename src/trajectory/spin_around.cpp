@@ -3,14 +3,13 @@
 
 SpinAround::SpinAround()
 {
-    this->set_lead_time(1);
+
 }
 
 
 
 SpinAround::SpinAround(double yaw, double t)
 {
-    this->set_lead_time(1);
     this->target_yaw = yaw;
     this->target_time = t;
 }

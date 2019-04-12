@@ -1,5 +1,5 @@
-#ifndef FIGURE_EIGHT_H
-#define FIGURE_EIGHT_H
+#ifndef INCLINED_CIRCLE_H
+#define INCLINED_CIRCLE_H
 
 #include <ros/ros.h>
 #include <ros/console.h>
@@ -12,11 +12,11 @@
 #define NUM_STATES (gtddp_drone_msgs::state_data::NUM_STATES)
 #endif
 
-class FigureEight : public TargetTrajectory
+class InclinedCircle : public TargetTrajectory
 {
     public:
-        FigureEight();
-        FigureEight(double alpha, double beta, double gamma, double freq);
+        InclinedCircle();
+        InclinedCircle(double alpha, double beta, double gamma, double freq);
 
         //Get the target data
         gtddp_drone_msgs::state_data get_target(double t);
@@ -28,6 +28,10 @@ class FigureEight : public TargetTrajectory
         double beta;
         double gamma;
         double freq;
+
+        //Numerical derivative stuff
+        double last_theta;
+        double last_phi;
 };
 
 #endif
