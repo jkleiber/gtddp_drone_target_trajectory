@@ -1,10 +1,10 @@
-#include "gtddp_drone_target_trajectory/trajectory/diff_flat_figure8.h"
+#include "gtddp_drone_target_trajectory/trajectory/inclined_circle.h"
 
 /**
  * @brief Construct a new Figure Eight:: Figure Eight object
  * 
  */
-FigureEight::FigureEight()
+InclinedCircle::InclinedCircle()
 {
 
 }
@@ -16,7 +16,7 @@ FigureEight::FigureEight()
  * @param beta 
  * @param period 
  */
-FigureEight::FigureEight(double alpha, double beta, double gamma, double freq)
+InclinedCircle::InclinedCircle(double alpha, double beta, double gamma, double freq)
 {
     this->alpha = alpha;
     this->beta = beta;
@@ -31,23 +31,23 @@ FigureEight::FigureEight(double alpha, double beta, double gamma, double freq)
  * @param t 
  * @return gtddp_drone_msgs::state_data 
  */
-gtddp_drone_msgs::state_data FigureEight::get_target(double t)
+gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
 {
     std::vector<double> target(12);
     gtddp_drone_msgs::state_data data;
     double thrust;
 
     //x, y, z, yaw
-    target[0] = alpha * cos(freq / (2 * t));    //x
+    target[0] = alpha * cos(freq * t);          //x
     target[1] = beta * sin(freq * t);           //y
-    target[2] = gamma;                          //z
+    target[2] = gamma * cos(freq * t) + 2;      //z
     target[8] = 0;                              //yaw
 
     //linear velocity
     target[3] = -alpha * sin(freq / (2 * t)) * (-freq * 2) / pow(2 * t, 2); //x dot
     target[4] = beta * cos(freq * t) * freq;                                //y dot
-    target[5] = 0;                                                          //z dot
-
+    //target[5] = 0;                                                          //z dot
+    //TODO: math for the circle
     //Thrust and moment calculations
     //thrust = 
 
