@@ -125,7 +125,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(gtddp_target_node src/gtddp_target_node.cpp src/trajectory/target_trajectory.cpp src/trajectory/straight_line.cpp src/trajectory/spin_around.cpp src/trajectory/diff_flat_figure8.cpp)
+add_executable(gtddp_target_node src/gtddp_target_node.cpp src/trajectory/target_trajectory.cpp src/trajectory/straight_line.cpp src/trajectory/spin_around.cpp src/trajectory/diff_flat_figure8.cpp src/trajectory/inclined_circle.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

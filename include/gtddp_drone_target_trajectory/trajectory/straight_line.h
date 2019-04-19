@@ -7,10 +7,6 @@
 #include "gtddp_drone_msgs/state_data.h"
 #include "gtddp_drone_target_trajectory/trajectory/target_trajectory.h"
 
-//Only define NUM_STATES if needed
-#ifndef NUM_STATES
-#define NUM_STATES (gtddp_drone_msgs::state_data::NUM_STATES)
-#endif
 
 class StraightLine : public TargetTrajectory
 {

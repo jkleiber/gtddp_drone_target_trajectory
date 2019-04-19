@@ -1,22 +1,13 @@
 #include "gtddp_drone_target_trajectory/trajectory/inclined_circle.h"
 
-/**
- * @brief Construct a new Figure Eight:: Figure Eight object
- * 
- */
+
 InclinedCircle::InclinedCircle()
 {
-    this->last_phi = 0;
-    this->last_theta = 0;
+    this->last_phi = -100;
+    this->last_theta = -100;
 }
 
-/**
- * @brief Construct a new Figure Eight:: Figure Eight object
- * 
- * @param alpha 
- * @param beta 
- * @param period 
- */
+
 InclinedCircle::InclinedCircle(double alpha, double beta, double gamma, double freq)
 {
     this->alpha = alpha;
@@ -24,8 +15,8 @@ InclinedCircle::InclinedCircle(double alpha, double beta, double gamma, double f
     this->gamma = gamma;
     this->freq = freq;
 
-    this->last_phi = 0;
-    this->last_theta = 0;
+    this->last_phi = -100;
+    this->last_theta = -100;
 }
 
 
@@ -61,7 +52,7 @@ gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
     //Calculate linear acceleration for intermediate control input
     accel_x = -alpha * pow(freq, 2) * cos(freq * t);
     accel_y = -beta * pow(freq, 2) * sin(freq * t);
-    accel_z = -gamma * pow(freq, 2) * cos(freq * t);
+    accel_z = -gamma * pow(freq, 2) * cos(freq * t);    //TODO: check to see if gravity needs to be added
 
     //Thrust and moment calculations
     thrust = sqrt(pow(accel_x, 2) + pow(accel_y, 2) + pow(accel_z, 2));

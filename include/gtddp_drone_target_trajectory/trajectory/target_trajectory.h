@@ -5,7 +5,10 @@
 
 //Make sure these constants match their associated values in Constants.cpp in gtddp_lib
 #define MASS (double)(1.25)
-#define DT (double)(0.001)
+#define TIME_STEP (double)(0.5)
+#define DT TIME_STEP
+#define NUM_STATES (gtddp_drone_msgs::state_data::NUM_STATES)
+
 
 class TargetTrajectory
 {

@@ -61,7 +61,7 @@ gtddp_drone_msgs::state_data FigureEight::get_target(double t)
     //Calculate linear acceleration for intermediate control input
     accel_x = (1 / pow(t, 4)) * ((-1/2)*alpha*pow(freq, 2)*cos(freq / (2 *t)) - 2*t*alpha*freq*sin(freq/(2 * t)));
     accel_y = -beta * pow(freq, 2) * sin(freq * t);
-    accel_z = 0;
+    accel_z = -9.8;
 
     //Thrust and moment calculations
     thrust = sqrt(pow(accel_x, 2) + pow(accel_y, 2) + pow(accel_z, 2));
@@ -84,8 +84,8 @@ gtddp_drone_msgs::state_data FigureEight::get_target(double t)
     }
 
     //Calculate angular derivatives
-    phi_dot = (last_phi - target[6]) / DT;
-    theta_dot = (last_theta - target[7]) / DT;
+    phi_dot = (target[6] - last_phi) / DT;
+    theta_dot = (target[7] - last_theta) / DT;
 
     //angular rates
     target[9] = phi_dot;
