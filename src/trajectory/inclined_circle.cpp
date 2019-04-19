@@ -40,8 +40,8 @@ gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
 
     //x, y, z, yaw
     target[0] = alpha * cos(freq * t);          //x
-    target[1] = beta * sin(freq * t);           //y
-    target[2] = gamma * cos(freq * t) + 2;      //z
+    target[1] = beta * sin(freq * t) - beta;    //y
+    target[2] = gamma * cos(freq * t) + 1;      //z
     target[8] = 0;                              //yaw
 
     //linear velocity
@@ -52,7 +52,7 @@ gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
     //Calculate linear acceleration for intermediate control input
     accel_x = -alpha * pow(freq, 2) * cos(freq * t);
     accel_y = -beta * pow(freq, 2) * sin(freq * t);
-    accel_z = -gamma * pow(freq, 2) * cos(freq * t);    //TODO: check to see if gravity needs to be added
+    accel_z = -gamma * pow(freq, 2) * cos(freq * t) - 9.8;
 
     //Thrust and moment calculations
     thrust = sqrt(pow(accel_x, 2) + pow(accel_y, 2) + pow(accel_z, 2));

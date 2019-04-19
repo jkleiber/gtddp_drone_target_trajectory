@@ -48,18 +48,18 @@ gtddp_drone_msgs::state_data FigureEight::get_target(double t)
     double phi_dot;
 
     //x, y, z, yaw
-    target[0] = alpha * cos(freq / (2 * t));    //x
+    target[0] = alpha * cos((freq * t) / 2);    //x
     target[1] = beta * sin(freq * t);           //y
     target[2] = gamma;                          //z
     target[8] = 0;                              //yaw
 
     //linear velocity
-    target[3] = alpha * sin(freq / (2 * t)) * freq / (2 * pow(t, 2)); //x dot
+    target[3] = -(alpha * freq / 2 ) * sin((freq * t) / 2);  //x dot
     target[4] = beta * cos(freq * t) * freq;                                //y dot
     target[5] = 0;                                                          //z dot
 
     //Calculate linear acceleration for intermediate control input
-    accel_x = (1 / pow(t, 4)) * ((-1/2)*alpha*pow(freq, 2)*cos(freq / (2 *t)) - 2*t*alpha*freq*sin(freq/(2 * t)));
+    accel_x = (-1/4)*alpha*pow(freq, 2)*cos((freq * t) / 2);
     accel_y = -beta * pow(freq, 2) * sin(freq * t);
     accel_z = -9.8;
 
