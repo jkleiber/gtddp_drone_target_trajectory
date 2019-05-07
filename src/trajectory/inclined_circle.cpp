@@ -5,6 +5,11 @@ InclinedCircle::InclinedCircle()
 {
     this->last_phi = -100;
     this->last_theta = -100;
+
+    //Default to the origin for initial conditions
+    this->x0 = 0.0;
+    this->y0 = 0.0;
+    this->z0 = 1.0;
 }
 
 
@@ -15,8 +20,22 @@ InclinedCircle::InclinedCircle(double alpha, double beta, double gamma, double f
     this->gamma = gamma;
     this->freq = freq;
 
+    //Default to the origin for initial conditions
+    this->x0 = 0.0;
+    this->y0 = 0.0;
+    this->z0 = 1.0;
+
     this->last_phi = -100;
     this->last_theta = -100;
+}
+
+
+
+void InclinedCircle::set_init_conds(double xo, double yo, double zo)
+{
+    this->x0 = xo;
+    this->y0 = yo;
+    this->z0 = zo;
 }
 
 
@@ -39,10 +58,10 @@ gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
     double phi_dot;
 
     //x, y, z, yaw
-    target[0] = alpha * cos(freq * t);          //x
-    target[1] = beta * sin(freq * t) - beta;    //y
-    target[2] = gamma * cos(freq * t) + 1;      //z
-    target[8] = 0;                              //yaw
+    target[0] = alpha * cos(freq * t) + (this->x0 - alpha);         //x
+    target[1] = beta * sin(freq * t) + this->y0;                    //y
+    target[2] = gamma * cos(freq * t) + 1 + (this->z0 - gamma - 1); //z
+    target[8] = 0;                                                  //yaw
 
     //linear velocity
     target[3] = -alpha * freq * sin(freq * t);  //x dot

@@ -3,7 +3,10 @@
 
 StraightLine::StraightLine()
 {
-
+    //Default to the origin for initial conditions
+    this->x0 = 0.0;
+    this->y0 = 0.0;
+    this->z0 = 1.0;
 }
 
 
@@ -14,8 +17,20 @@ StraightLine::StraightLine(double x, double y, double z, double t)
     this->target_y = y;
     this->target_z = z;
     this->target_time = t;
+
+    //Default to the origin for initial conditions
+    this->x0 = 0.0;
+    this->y0 = 0.0;
+    this->z0 = 1.0;
 }
 
+
+void StraightLine::set_init_conds(double xo, double yo, double zo)
+{
+    this->x0 = xo;
+    this->y0 = yo;
+    this->z0 = zo;
+}
 
 
 gtddp_drone_msgs::state_data StraightLine::get_target(double cur_time)
@@ -33,9 +48,9 @@ gtddp_drone_msgs::state_data StraightLine::get_target(double cur_time)
     interpolation = interpolation > 1 ? 1 : interpolation;
 
     //Calculate the interpolation of each coordinate
-    state_vector[0] = this->target_x * interpolation;
-    state_vector[1] = this->target_y * interpolation;
-    state_vector[2] = ((this->target_z - 1) * interpolation) + 1;   //The drone starts 1 meter off the ground, so set the offset accordingly
+    state_vector[0] = ((this->target_x - this->x0) * interpolation) + this->x0;
+    state_vector[1] = ((this->target_y - this->y0) * interpolation) + this->y0;
+    state_vector[2] = ((this->target_z - this->z0) * interpolation) + this->z0;   //The drone starts 1 meter off the ground, so set the offset accordingly
 
     for(int i = 0; i < NUM_STATES; ++i)
         target_state.states[i] = state_vector[i];

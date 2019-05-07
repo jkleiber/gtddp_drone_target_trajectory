@@ -8,6 +8,11 @@ FigureEight::FigureEight()
 {
     this->last_phi = 0;
     this->last_theta = 0;
+
+    //Default to the origin for initial conditions
+    this->x0 = 0.0;
+    this->y0 = 0.0;
+    this->z0 = 1.0;
 }
 
 /**
@@ -24,8 +29,21 @@ FigureEight::FigureEight(double alpha, double beta, double gamma, double freq)
     this->gamma = gamma;
     this->freq = freq;
 
+    //Default to the origin for initial conditions
+    this->x0 = 0.0;
+    this->y0 = 0.0;
+    this->z0 = 1.0;
+
     this->last_phi = -100;
     this->last_theta = -100;
+}
+
+
+void FigureEight::set_init_conds(double xo, double yo, double zo)
+{
+    this->x0 = xo;
+    this->y0 = yo;
+    this->z0 = zo;
 }
 
 
@@ -48,20 +66,20 @@ gtddp_drone_msgs::state_data FigureEight::get_target(double t)
     double phi_dot;
 
     //x, y, z, yaw
-    target[0] = alpha * cos((freq * t) / 2);    //x
-    target[1] = beta * sin(freq * t);           //y
-    target[2] = gamma;                          //z
-    target[8] = 0;                              //yaw
+    target[0] = alpha * cos((freq * t) / 2) + (this->x0 - alpha);   //x
+    target[1] = beta * sin(freq * t) + this->y0;                    //y
+    target[2] = this->z0;                                           //z
+    target[8] = 0;                                                  //yaw
 
     //linear velocity
-    target[3] = -(alpha * freq / 2 ) * sin((freq * t) / 2);  //x dot
-    target[4] = beta * cos(freq * t) * freq;                                //y dot
-    target[5] = 0;                                                          //z dot
+    target[3] = -(alpha * freq / 2 ) * sin((freq * t) / 2);         //x dot
+    target[4] = beta * cos(freq * t) * freq;                        //y dot
+    target[5] = 0;                                                  //z dot
 
     //Calculate linear acceleration for intermediate control input
-    accel_x = (-1/4)*alpha*pow(freq, 2)*cos((freq * t) / 2);
-    accel_y = -beta * pow(freq, 2) * sin(freq * t);
-    accel_z = -9.8;
+    accel_x = (-1/4)*alpha*pow(freq, 2)*cos((freq * t) / 2);        //x accel
+    accel_y = -beta * pow(freq, 2) * sin(freq * t);                 //y accel
+    accel_z = -9.8;                                                 //z accel (gravity)
 
     //Thrust and moment calculations
     thrust = sqrt(pow(accel_x, 2) + pow(accel_y, 2) + pow(accel_z, 2));
@@ -73,8 +91,8 @@ gtddp_drone_msgs::state_data FigureEight::get_target(double t)
     cp3 = accel_z * MASS / thrust;
 
     //roll, pitch
-    target[6] = -asin(cp2);
-    target[7] = atan(cp1 / cp3);
+    target[6] = -asin(cp2);                                         //pitch
+    target[7] = atan(cp1 / cp3);                                    //roll
 
     //Initialize the numerical derivative (Note: first point's derivative will always be 0)
     if(last_phi == -100 && last_theta == -100)

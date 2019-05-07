@@ -14,6 +14,7 @@ class TargetTrajectory
 {
     public:
         virtual gtddp_drone_msgs::state_data get_target(double t) = 0;
+        virtual void set_init_conds(double xo, double yo, double zo) = 0;
 
     private:
         int lead_time;

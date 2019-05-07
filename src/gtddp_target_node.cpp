@@ -43,6 +43,12 @@ bool target_callback(gtddp_drone_msgs::target::Request &req, gtddp_drone_msgs::t
     return true;
 }
 
+
+void init_conds_callback(const gtddp_drone_msgs::state_data::ConstPtr& init_conds)
+{
+    target_traj->set_init_conds(init_conds->states[0], init_conds->states[1], init_conds->states[2]);
+}
+
 /**
  * @brief 
  * 
@@ -64,6 +70,9 @@ int main(int argc, char **argv)
     //Advertise control output and landing mode
     //ros::Publisher target_pub = target_node.advertise<gtddp_drone_msgs::state_data>(target_node.resolveName("/gtddp_drone_target_trajectory/target_state"), MAX_BUFFER);
     
+    //Subscribe to any initial conditions updates from the main controller
+    ros::Subscriber init_sub = target_node.subscribe(target_node.resolveName("/gtddp_drone/initial_conditions"), MAX_BUFFER, &init_conds_callback);
+
     //Advertise the target state as a service
     ros::ServiceServer target_srv = target_node.advertiseService(target_node.resolveName("/gtddp_drone_target_trajectory/target_state"), target_callback);
 

@@ -14,11 +14,19 @@ class StraightLine : public TargetTrajectory
         StraightLine();
         StraightLine(double x, double y, double z, double t);
 
+        //Init
+        void set_init_conds(double xo, double yo, double zo);
+
         //Get the target data
         gtddp_drone_msgs::state_data get_target(double t);
     
     private:
         double target_time;
+
+        //Initial position
+        double x0;
+        double y0;
+        double z0;
 
         //Target coordinates
         double target_x;

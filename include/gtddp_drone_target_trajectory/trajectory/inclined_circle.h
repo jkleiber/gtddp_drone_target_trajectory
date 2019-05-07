@@ -13,6 +13,9 @@ class InclinedCircle : public TargetTrajectory
         InclinedCircle();
         InclinedCircle(double alpha, double beta, double gamma, double freq);
 
+        //Init
+        void set_init_conds(double xo, double yo, double zo);
+
         //Get the target data
         gtddp_drone_msgs::state_data get_target(double t);
     
@@ -23,6 +26,11 @@ class InclinedCircle : public TargetTrajectory
         double beta;
         double gamma;
         double freq;
+
+        //Initial position
+        double x0;
+        double y0;
+        double z0;
 
         //Numerical derivative stuff
         double last_theta;
