@@ -48,9 +48,9 @@ gtddp_drone_msgs::state_data StraightLine::get_target(double cur_time)
     interpolation = interpolation > 1 ? 1 : interpolation;
 
     //Calculate the interpolation of each coordinate
-    state_vector[0] = ((this->target_x - this->x0) * interpolation) + this->x0;
-    state_vector[1] = ((this->target_y - this->y0) * interpolation) + this->y0;
-    state_vector[2] = ((this->target_z - this->z0) * interpolation) + this->z0;   //The drone starts 1 meter off the ground, so set the offset accordingly
+    state_vector[0] = (this->target_x * interpolation) + this->x0;
+    state_vector[1] = (this->target_y * interpolation) + this->y0;
+    state_vector[2] = (this->target_z * interpolation) + this->z0;   //The drone starts 1 meter off the ground, so set the offset accordingly
 
     for(int i = 0; i < NUM_STATES; ++i)
         target_state.states[i] = state_vector[i];
