@@ -6,7 +6,7 @@ StraightLine::StraightLine()
     //Default to the origin for initial conditions
     this->x0 = 0.0;
     this->y0 = 0.0;
-    this->z0 = 1.0;
+    this->z0 = 0.0;
 }
 
 
@@ -21,7 +21,7 @@ StraightLine::StraightLine(double x, double y, double z, double t)
     //Default to the origin for initial conditions
     this->x0 = 0.0;
     this->y0 = 0.0;
-    this->z0 = 1.0;
+    this->z0 = 0.0;
 }
 
 

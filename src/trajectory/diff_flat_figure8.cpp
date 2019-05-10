@@ -12,7 +12,7 @@ FigureEight::FigureEight()
     //Default to the origin for initial conditions
     this->x0 = 0.0;
     this->y0 = 0.0;
-    this->z0 = 1.0;
+    this->z0 = 0.0;
 }
 
 /**
@@ -32,7 +32,7 @@ FigureEight::FigureEight(double alpha, double beta, double gamma, double freq)
     //Default to the origin for initial conditions
     this->x0 = 0.0;
     this->y0 = 0.0;
-    this->z0 = 1.0;
+    this->z0 = 0.0;
 
     this->last_phi = -100;
     this->last_theta = -100;
