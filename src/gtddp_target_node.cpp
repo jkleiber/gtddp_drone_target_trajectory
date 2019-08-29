@@ -26,7 +26,7 @@ double current_time = 0.0;
 
 //TargetTrajectory *target_traj = new StraightLine(0, 0, 5, 10.0);    //fly up 5 meters
 //TargetTrajectory *target_traj = new StraightLine(0, 5, 0, 100.0);    //fly on y axis 5 meters
-//TargetTrajectory *target_traj = new StraightLine(3, 0, 0, 10.0);    //fly forward 5 meters
+//TargetTrajectory *target_traj = new StraightLine(5, 0, 1, 10.0);    //fly forward 5 meters
 //TargetTrajectory *target_traj = new StraightLine(0, 5, 5, 1.5);    //fly up 5 meters and sideways 5 meters
 //TargetTrajectory *target_traj = new SpinAround(2, 40);
 TargetTrajectory *target_traj = new FigureEight(1.6, 1.6, 1.0, 0.2);  //fly a figure eight at 0.8 rad/sec
