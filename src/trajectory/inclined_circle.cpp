@@ -40,10 +40,10 @@ void InclinedCircle::set_init_conds(double xo, double yo, double zo)
 
 
 /**
- * @brief 
- * 
- * @param t 
- * @return gtddp_drone_msgs::state_data 
+ * @brief
+ *
+ * @param t
+ * @return gtddp_drone_msgs::state_data
  */
 gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
 {
@@ -60,14 +60,14 @@ gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
     //x, y, z, yaw
     target[0] = alpha * cos(freq * t) + (this->x0 - alpha);         //x
     target[1] = beta * sin(freq * t) + this->y0;                    //y
-    target[2] = gamma * cos(freq * t) + 1 + (this->z0 - gamma - 1); //z
+    target[2] = gamma * cos(freq * t) + (this->z0 - gamma);         //z
     target[8] = 0;                                                  //yaw
 
     //linear velocity
     target[3] = -alpha * freq * sin(freq * t);  //x dot
     target[4] = beta * freq * cos(freq * t);    //y dot
     target[5] = -gamma * freq * sin(freq * t);  //z dot
-    
+
     //Calculate linear acceleration for intermediate control input
     accel_x = -alpha * pow(freq, 2) * cos(freq * t);
     accel_y = -beta * pow(freq, 2) * sin(freq * t);
