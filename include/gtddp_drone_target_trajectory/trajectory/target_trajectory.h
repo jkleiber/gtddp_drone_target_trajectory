@@ -3,8 +3,9 @@
 
 #include <gtddp_drone_msgs/state_data.h>
 
+//TODO: pull these constants from the parameter server
 //Make sure these constants match their associated values in Constants.cpp in gtddp_lib
-#define MASS (double)(1.25)
+#define MASS (double)(0.436)
 #define NUM_STATES (gtddp_drone_msgs::state_data::NUM_STATES)
 
 
@@ -20,7 +21,7 @@ class TargetTrajectory
     private:
         int lead_time;
 
-        
+
 };
 
 #endif
