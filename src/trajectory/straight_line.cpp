@@ -53,7 +53,7 @@ gtddp_drone_msgs::state_data StraightLine::get_target(double cur_time)
     state_vector[2] = (this->target_z * interpolation) + this->z0;   //The drone starts 1 meter off the ground, so set the offset accordingly
 
     for(int i = 0; i < NUM_STATES; ++i)
-        target_state.states[i] = state_vector[i];
+        target_state.state[i] = state_vector[i];
 
     return target_state;
 }

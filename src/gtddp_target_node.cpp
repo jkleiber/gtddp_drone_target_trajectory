@@ -47,8 +47,8 @@ bool target_callback(gtddp_drone_msgs::target::Request &req, gtddp_drone_msgs::t
 
 void init_conds_callback(const gtddp_drone_msgs::state_data::ConstPtr& init_conds)
 {
-    std::cout << "INITIAL CONDITIONS: (" << init_conds->states[0] << ", " << init_conds->states[1] << ", " << init_conds->states[2] << ")\n";
-    target_traj->set_init_conds(init_conds->states[0], init_conds->states[1], init_conds->states[2]);
+    std::cout << "INITIAL CONDITIONS: (" << init_conds->state[0] << ", " << init_conds->state[1] << ", " << init_conds->state[2] << ")\n";
+    target_traj->set_init_conds(init_conds->state[0], init_conds->state[1], init_conds->state[2]);
 }
 
 /**

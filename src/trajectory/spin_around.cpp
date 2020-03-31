@@ -50,7 +50,7 @@ gtddp_drone_msgs::state_data SpinAround::get_target(double cur_time)
     state_vector[8] = this->target_yaw * interpolation;
 
     for(int i = 0; i < NUM_STATES; ++i)
-        target_state.states[i] = state_vector[i];
+        target_state.state[i] = state_vector[i];
 
     return target_state;
 }

@@ -2,7 +2,7 @@
 
 /**
  * @brief Construct a new Figure Eight:: Figure Eight object
- * 
+ *
  */
 FigureEight::FigureEight()
 {
@@ -17,10 +17,10 @@ FigureEight::FigureEight()
 
 /**
  * @brief Construct a new Figure Eight:: Figure Eight object
- * 
- * @param alpha 
- * @param beta 
- * @param period 
+ *
+ * @param alpha
+ * @param beta
+ * @param period
  */
 FigureEight::FigureEight(double alpha, double beta, double gamma, double freq)
 {
@@ -48,10 +48,10 @@ void FigureEight::set_init_conds(double xo, double yo, double zo)
 
 
 /**
- * @brief 
- * 
- * @param t 
- * @return gtddp_drone_msgs::state_data 
+ * @brief
+ *
+ * @param t
+ * @return gtddp_drone_msgs::state_data
  */
 gtddp_drone_msgs::state_data FigureEight::get_target(double t)
 {
@@ -113,7 +113,7 @@ gtddp_drone_msgs::state_data FigureEight::get_target(double t)
     //Convert to state_data
     for(int i = 0; i < NUM_STATES; ++i)
     {
-        data.states[i] = target[i];
+        data.state[i] = target[i];
     }
 
     //Save last values

@@ -105,7 +105,7 @@ gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
     //Convert to state_data
     for(int i = 0; i < NUM_STATES; ++i)
     {
-        data.states[i] = target[i];
+        data.state[i] = target[i];
     }
 
     //Save last values
