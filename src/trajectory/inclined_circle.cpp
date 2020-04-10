@@ -49,6 +49,7 @@ gtddp_drone_msgs::state_data InclinedCircle::get_target(double t)
 {
     std::vector<double> target(12);
     gtddp_drone_msgs::state_data data;
+    data.state.resize(NUM_STATES);
     double accel_x;
     double accel_y;
     double accel_z;

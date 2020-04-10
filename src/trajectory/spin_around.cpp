@@ -35,6 +35,7 @@ gtddp_drone_msgs::state_data SpinAround::get_target(double cur_time)
 {
     //Create a state message
     gtddp_drone_msgs::state_data target_state;
+    target_state.state.resize(NUM_STATES);
 
     //Create a state vector
     std::vector<double> state_vector(NUM_STATES, 0);

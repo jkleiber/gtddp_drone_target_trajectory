@@ -47,8 +47,8 @@ bool target_callback(gtddp_drone_msgs::target::Request &req, gtddp_drone_msgs::t
 
 void init_conds_callback(const gtddp_drone_msgs::state_data::ConstPtr& init_conds)
 {
-    std::cout << "INITIAL CONDITIONS: (" << init_conds->state[0] << ", " << init_conds->state[1] << ", " << init_conds->state[2] << ")\n";
     target_traj->set_init_conds(init_conds->state[0], init_conds->state[1], init_conds->state[2]);
+    std::cout << "INITIAL CONDITIONS: (" << init_conds->state[0] << ", " << init_conds->state[1] << ", " << init_conds->state[2] << ")\n";
 }
 
 /**
@@ -71,9 +71,6 @@ int main(int argc, char **argv)
 
     //Set DT in the target trajectory
     target_traj->set_dt(TIME_STEP);
-
-    //Advertise control output and landing mode
-    //ros::Publisher target_pub = target_node.advertise<gtddp_drone_msgs::state_data>(target_node.resolveName("/gtddp_drone_target_trajectory/target_state"), MAX_BUFFER);
 
     //Subscribe to any initial conditions updates from the main controller
     ros::Subscriber init_sub = target_node.subscribe(target_node.resolveName("/gtddp_drone/initial_conditions"), MAX_BUFFER, &init_conds_callback);
