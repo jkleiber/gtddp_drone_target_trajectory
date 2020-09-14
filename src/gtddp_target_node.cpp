@@ -29,8 +29,8 @@ double current_time = 0.0;
 //TargetTrajectory *target_traj = new StraightLine(5, 0, 1, 10.0);    //fly forward 5 meters
 //TargetTrajectory *target_traj = new StraightLine(0, 5, 5, 1.5);    //fly up 5 meters and sideways 5 meters
 //TargetTrajectory *target_traj = new SpinAround(2, 40);
-//TargetTrajectory *target_traj = new FigureEight(0.9, 0.9, 1.0, 0.6);  //fly a figure eight at 0.6 rad/sec
-TargetTrajectory *target_traj = new InclinedCircle(0.9, 0.8, 0.5, 0.6);
+TargetTrajectory *target_traj = new FigureEight(0.9, 0.9, 1.0, 0.4);  //fly a figure eight at 0.4 rad/sec
+// TargetTrajectory *target_traj = new InclinedCircle(0.9, 0.8, 0.3, 0.4);
 
 bool target_callback(gtddp_drone_msgs::target::Request &req, gtddp_drone_msgs::target::Response &resp)
 {
